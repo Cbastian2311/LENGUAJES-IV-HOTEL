@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function Footer() {
+export function Footer({ setSeccion, soloHabitaciones = false }) {
   const habitaciones = [
     {
       id: 1,
@@ -65,7 +65,11 @@ export function Footer() {
                     <li key={i}>✓ {srv}</li>
                   ))}
                 </ul>
-                <a href="#contacto" className="btn-room-book">Reservar Esta Habitación</a>
+                {setSeccion ? (
+                  <button onClick={() => setSeccion('contacto')} className="btn-room-book">Reservar Esta Habitación</button>
+                ) : (
+                  <a href="#contacto" className="btn-room-book">Reservar Esta Habitación</a>
+                )}
               </div>
             </div>
           ))}
@@ -73,32 +77,34 @@ export function Footer() {
       </div>
 
       {/* Pie de página con información general y derechos */}
-      <div className="footer-bottom">
-        <div className="container footer-content">
-          <div className="footer-col">
-            <h3> Hotel ucasal</h3>
-            <p>La combinación perfecta entre relajación, naturaleza y hospitalidad de primera clase.</p>
+      {!soloHabitaciones && (
+        <div className="footer-bottom">
+          <div className="container footer-content">
+            <div className="footer-col">
+              <h3> Hotel ucasal</h3>
+              <p>La combinación perfecta entre relajación, naturaleza y hospitalidad de primera clase.</p>
+            </div>
+            <div className="footer-col">
+              <h4>Navegación</h4>
+              <ul>
+                <li><a href="#inicio" onClick={(e) => { if(setSeccion){ e.preventDefault(); setSeccion('inicio'); } }}>Inicio</a></li>
+                <li><a href="#about" onClick={(e) => { if(setSeccion){ e.preventDefault(); setSeccion('about'); } }}>Sobre el Hotel</a></li>
+                <li><a href="#habitaciones" onClick={(e) => { if(setSeccion){ e.preventDefault(); setSeccion('habitaciones'); } }}>Nuestras 4 Habitaciones</a></li>
+                <li><a href="#contacto" onClick={(e) => { if(setSeccion){ e.preventDefault(); setSeccion('contacto'); } }}>Contacto y Reservas</a></li>
+              </ul>
+            </div>
+            <div className="footer-col">
+              <h4>Atención al Cliente</h4>
+              <p>Lunes a Domingo: 24 horas</p>
+              <p>Email: reservas@granhotelucasal.com</p>
+              <p>Tel: +54 9 11 4567-8900</p>
+            </div>
           </div>
-          <div className="footer-col">
-            <h4>Navegación</h4>
-            <ul>
-              <li><a href="#inicio">Inicio</a></li>
-              <li><a href="#about">Sobre el Hotel</a></li>
-              <li><a href="#habitaciones">Nuestras 4 Habitaciones</a></li>
-              <li><a href="#contacto">Contacto y Reservas</a></li>
-            </ul>
-          </div>
-          <div className="footer-col">
-            <h4>Atención al Cliente</h4>
-            <p>Lunes a Domingo: 24 horas</p>
-            <p>Email: reservas@granhotelucasal.com</p>
-            <p>Tel: +54 9 11 4567-8900</p>
+          <div className="footer-copyright">
+            <p>© {new Date().getFullYear()} Hotel ucasal - Todos los derechos reservados.</p>
           </div>
         </div>
-        <div className="footer-copyright">
-          <p>© {new Date().getFullYear()} Hotel ucasal - Todos los derechos reservados.</p>
-        </div>
-      </div>
+      )}
     </footer>
   );
 }

@@ -1,28 +1,60 @@
 import React from 'react';
 
-export function Header() {
+export function Header({ seccion, setSeccion }) {
   return (
     <header className="hotel-header">
       <nav className="navbar">
-        <div className="logo">
+        <div className="logo" onClick={() => setSeccion('inicio')} style={{ cursor: 'pointer' }}>
           <span className="hotel-icon"></span>
           <h2>Hotel ucasal</h2>
         </div>
         <ul className="nav-links">
-          <li><a href="#inicio">Inicio</a></li>
-          <li><a href="#about">Sobre el Hotel</a></li>
-          <li><a href="#habitaciones">Habitaciones</a></li>
-          <li><a href="#contacto">Contacto</a></li>
+          <li>
+            <button 
+              className={`nav-btn ${seccion === 'inicio' ? 'active' : ''}`}
+              onClick={() => setSeccion('inicio')}
+            >
+              Inicio
+            </button>
+          </li>
+          <li>
+            <button 
+              className={`nav-btn ${seccion === 'about' ? 'active' : ''}`}
+              onClick={() => setSeccion('about')}
+            >
+              Sobre el Hotel
+            </button>
+          </li>
+          <li>
+            <button 
+              className={`nav-btn ${seccion === 'habitaciones' ? 'active' : ''}`}
+              onClick={() => setSeccion('habitaciones')}
+            >
+              Habitaciones
+            </button>
+          </li>
+          <li>
+            <button 
+              className={`nav-btn ${seccion === 'contacto' ? 'active' : ''}`}
+              onClick={() => setSeccion('contacto')}
+            >
+              Contacto
+            </button>
+          </li>
         </ul>
       </nav>
 
-      <div id="inicio" className="hero-banner">
-        <div className="hero-content">
-          <h1>Bienvenidos a Hotel ucasal</h1>
-          <p>Tu refugio de confort, elegancia y tranquilidad frente al mar</p>
-          <a href="#habitaciones" className="btn-reservar">Ver Habitaciones</a>
+      {seccion === 'inicio' && (
+        <div id="inicio" className="hero-banner">
+          <div className="hero-content">
+            <h1>Bienvenidos a Hotel ucasal</h1>
+            <p>Tu refugio de confort, elegancia y tranquilidad frente al mar</p>
+            <button onClick={() => setSeccion('habitaciones')} className="btn-reservar">
+              Ver Habitaciones
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }
